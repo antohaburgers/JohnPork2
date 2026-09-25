@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#111416">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Зондби">
+  <meta name="description" content="ЗОНДБИ ДАБАЛАТОРИЯ — минималистичный survival про спецагента Джона Порка.">
+  <title>ЗОНДБИ ДАБАЛАТОРИЯ</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111416'/%3E%3Crect x='19' y='23' width='26' height='31' fill='%235f686c'/%3E%3Crect x='19' y='10' width='26' height='17' fill='%2373ff69'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game-shell" aria-label="Игра Зондби Дабалатория">
+    <aside id="control-rail" aria-label="Управление движением">
+      <span>СТИК</span>
+    </aside>
+    <canvas id="game" width="1280" height="720" aria-label="Игровая арена"></canvas>
+    <aside id="hud-panel" aria-label="Показатели игры">
+      <div class="hud-label">HP</div>
+      <div class="hud-health"><i id="hud-health-fill"></i></div>
+      <strong id="hud-health-text">100 / 100</strong>
+      <div class="hud-rule"></div>
+      <div class="hud-label">ЗОНДБИ</div>
+      <strong id="hud-kills">0</strong>
+      <div class="hud-rule"></div>
+      <div class="hud-label">ОРУЖИЕ</div>
+      <strong id="hud-weapon">ПИСТОЛЕТ</strong>
+      <small id="hud-next">СЛЕД.: 50</small>
+      <div class="hud-rule"></div>
+      <div class="hud-label">ВРЕМЯ</div>
+      <strong id="hud-time">00:00</strong>
+    </aside>
+
+    <section id="start-screen" class="screen active">
+      <div class="title-wrap">
+        <p class="eyebrow">V4.0 // ПРОМЫШЛЕННАЯ УТИЛИЗАЦИЯ</p>
+        <h1>ЗОНДБИ<br><span>ДАБАЛАТОРИЯ</span></h1>
+        <p class="agent">ДЖОН ПОРК · ПАРКОВКА САМА СЕБЯ НЕ ЗАЧИСТИТ</p>
+        <div class="kits" aria-label="Стартовый набор">
+          <button data-kit="assault"><b>ШТУРМОВИК</b><small>125 HP · быстрый Поркалипсис</small></button>
+          <button data-kit="engineer"><b>ИНЖЕНЕР</b><small>Боевой дрон с первой секунды</small></button>
+          <button data-kit="runner"><b>КУРЬЕР</b><small>Быстрее бег · чаще рывок</small></button>
+        </div>
+        <button id="start-button" class="action">НАЧАТЬ МЯСО</button>
+        <button id="install-button" class="install-action" hidden>УСТАНОВИТЬ ПРИЛОЖЕНИЕ</button>
+        <p class="hint">Стреляет сам. Двигайся, собирай груз, взрывай бочки.<br>Стик / WASD · <kbd>ПРОБЕЛ</kbd> рывок · <kbd>Q</kbd> Поркалипсис</p>
+      </div>
+    </section>
+
+    <section id="upgrade-screen" class="screen" aria-label="Выбор улучшения">
+      <div class="upgrade-wrap">
+        <p class="eyebrow">ДОПУСК К ЭКСПЕРИМЕНТУ ПОЛУЧЕН</p>
+        <h2>ВЫБЕРИ УЛУЧШЕНИЕ</h2>
+        <div id="upgrade-cards" class="cards"></div>
+      </div>
+    </section>
+
+    <section id="pause-screen" class="screen" aria-label="Пауза">
+      <div class="pause-wrap">
+        <p class="eyebrow">ОПЕРАЦИЯ ПРИОСТАНОВЛЕНА</p>
+        <h2>ПАУЗА</h2>
+        <button id="resume-button" class="action">ПРОДОЛЖИТЬ МЯСО</button>
+      </div>
+    </section>
+
+    <section id="game-over-screen" class="screen">
+      <div class="game-over-box">
+        <p class="eyebrow danger">ОПЕРАЦИЯ ПРОВАЛЕНА</p>
+        <h2>ДЖОН ПОРК ПОГИБ</h2>
+        <div id="final-stats" class="final-stats"></div>
+        <p id="new-record" class="new-record">НОВЫЙ РЕКОРД ПОРКА</p>
+        <div class="button-row">
+          <button id="restart-button" class="action">ЕЩЁ РАЗ</button>
+          <button id="menu-button" class="action secondary">В МЕНЮ</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="joystick" aria-label="Виртуальный джойстик">
+      <div id="joystick-base"></div>
+      <div id="joystick-knob"></div>
+    </div>
+    <button id="pause-button" aria-label="Поставить игру на паузу" hidden>Ⅱ</button>
+    <div id="mayhem-hud" hidden><b id="mayhem-score"></b><span id="mayhem-combo"></span><strong id="event-text"></strong></div>
+    <div id="combat-controls" hidden><button id="dash-button">РЫВОК</button><button id="ultimate-button">ПОРК 0%</button></div>
+    <button id="sound-button">ЗВУК: ВКЛ</button>
+    <button id="update-button" hidden>ДОСТУПНО ОБНОВЛЕНИЕ · ПРИМЕНИТЬ</button>
+  </main>
+  <script src="game.js"></script>
+  <script src="mayhem.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>
